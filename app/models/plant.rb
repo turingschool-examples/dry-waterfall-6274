@@ -6,4 +6,8 @@ class Plant < ApplicationRecord
   def self.unique_plants_harvested_in_one_hundred
     where('days_to_harvest < ?', 100).distinct
   end
+
+  def self.by_popularity
+    joins(:plot_plants).group('plants.id').order('COUNT(plot_plants.id) DESC')
+  end
 end

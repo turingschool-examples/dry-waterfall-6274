@@ -1,5 +1,13 @@
 <h1><%=@garden.name%></h1>
 
+<section class="plants">
+  <% @garden.plants.by_popularity.each do |plant| %>
+    <div id="plant-<%= plant.id %>">
+      <h3><%= plant.name %></h3>
+    </div>
+  <% end %>
+</section>
+
 <section class="plants-under-100">
   <% @garden.plants.unique_plants_harvested_in_one_hundred.each do |plant| %>
     <div id="plant-<%= plant.id %>">
@@ -7,3 +15,4 @@
     </div>
   <% end %>
 </section>  
+

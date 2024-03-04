@@ -27,5 +27,9 @@ RSpec.describe Plant, type: :model do
       expect(Plant.unique_plants_harvested_in_one_hundred).to eq([@plant_1])
       expect(Plant.unique_plants_harvested_in_one_hundred).to_not eq([@plant_2])
     end
+
+    it ".by_popularity" do 
+      expect(Plant.by_popularity).to eq([@plant_2, @plant_1])
+    end
   end
 end

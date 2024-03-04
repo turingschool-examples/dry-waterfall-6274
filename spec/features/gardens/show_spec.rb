@@ -29,5 +29,20 @@ RSpec.describe 'garden show', type: :feature do
         expect(page).to_not have_content(@plant_2.name)
       end
     end
+
+    # Extension 1
+    it "orders plants from most common to least" do 
+      # When I visit a garden's show page,
+      visit "/gardens/#{@garden.id}"
+      # Then I see the list of plants is sorted by the number of times the plant appears in any of that garden's plots from most to least
+      within '.plants' do
+        expect(@plant_2.name).to appear_before(@plant_1.name)
+
+        expect(@plant_1.name).to_not appear_before(@plant_2.name)
+      end
+        
+    # (Note: you should only make 1 database query to retrieve the sorted list of plants)
+    # does this mean i should tweak my plants under 100? I'm reading this as a seperate list.
+    end
   end
 end

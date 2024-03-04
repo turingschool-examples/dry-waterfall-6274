@@ -13,7 +13,7 @@ RSpec.describe 'plot index', type: :feature do
 
       PlotPlant.create!(plot_id: @plot_1.id, plant_id: @plant_1.id)
       PlotPlant.create!(plot_id: @plot_1.id, plant_id: @plant_2.id)
-      PlotPlant.create!(plot_id: @plot_1.id, plant_id: @plant_2.id)
+      PlotPlant.create!(plot_id: @plot_2.id, plant_id: @plant_2.id)
     end
 
     # User Story 1, Plots Index Page
@@ -39,7 +39,6 @@ RSpec.describe 'plot index', type: :feature do
     it "can remove a plant from a plot" do 
       # When I visit the plots index page
       visit "/plots"
-      save_and_open_page
 
       within "#plot-#{@plot_1.id}" do
         # Next to each plant's name

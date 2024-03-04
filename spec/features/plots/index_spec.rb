@@ -30,16 +30,23 @@ RSpec.describe "Plots Index Page", type: :feature do
       it 'see a list of all plot numbers' do
          visit plots_path
 
-         within "#plot-#{plot1.id}" do
+         within "#plot-#{@plot1.id}" do
             expect(page).to have_content(@plot1.number)
+            expect(page).to have_content(@plant1.name)
+            expect(page).to have_content(@plant2.name)
          end
 
-         within "#plot-#{plot2.id}" do
+         within "#plot-#{@plot2.id}" do
             expect(page).to have_content(@plot2.number)
+            expect(page).to have_content(@plant1.name)
+            expect(page).to have_content(@plant5.name)
          end
 
-         within "#plot-#{plot2.id}" do
+         within "#plot-#{@plot2.id}" do
             expect(page).to have_content(@plot2.number)
+            expect(page).to have_content(@plant3.name)
+            expect(page).to have_content(@plant2.name)
+            expect(page).to have_content(@plant4.name)
          end
       end
    end

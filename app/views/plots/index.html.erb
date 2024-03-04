@@ -3,7 +3,7 @@
     <h1>Plot Number: <%= plot.number %></h1>
 
       <% plot.plants.each do |plant| %>
-        <p><%= plant.name %> Plant</p>
+        <p><%= plant.name %> Plant</p> <%= button_to "Remove #{plant.name}", plot_plant_path(plot,plant), method: :delete %>
       <% end %>
   </section>
 <% end %>

@@ -35,15 +35,20 @@ RSpec.describe "Garden Show", type: :feature do
     end
 
     it "displays all garden's plants once that have <100 days_to_harvest" do
-      expect(page).to have_content("Potato")
-      expect(page).to have_content("Cabbage")
-      expect(page).to_not have_content("Pumpkin")
+      within "#100-day-harvest-plants" do
+        expect(page).to have_content("Potato")
+        expect(page).to have_content("Cabbage")
+        expect(page).to_not have_content("Pumpkin")
+     end
 
       visit "/gardens/#{garden_2.id}"
-      expect(page).to have_content("Cabbage")
-      expect(page).to have_content("Tomato")
-      expect(page).to_not have_content("Pumpkin")
-      expect(page).to_not have_content("Carrot")
+
+      within "#100-day-harvest-plants" do
+        expect(page).to have_content("Cabbage")
+        expect(page).to have_content("Tomato")
+        expect(page).to_not have_content("Pumpkin")
+        expect(page).to_not have_content("Carrot")
+      end
     end
   end
 end

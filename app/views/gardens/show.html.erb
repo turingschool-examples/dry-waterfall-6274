@@ -1,11 +1,15 @@
 <h1> <%=@garden.name%> </h1>
 
-<h3> Plants </h3>
-<% @plants.each do |plant| %>
-  <p><%= plant.name %></p>
-<% end %>
+<div id="garden-plants">
+  <h3> Plants </h3>
+  <% @plants.each do |plant| %>
+    <p><%= plant.name %></p>
+  <% end %>
+</div>
 
-<h3> <%= "Plants with Harvest < 100 Days" %> </h3>
-<% @hundred_day_plants.each do |plant| %>
-  <p><%= plant.name %></p>
-<% end %>
+<div id="100-day-harvest-plants">
+  <h3> <%= "Plants with Harvest < 100 Days" %> </h3>
+  <% @hundred_day_plants.each do |plant| %>
+    <p><%= plant.name %></p>
+  <% end %>
+</div>

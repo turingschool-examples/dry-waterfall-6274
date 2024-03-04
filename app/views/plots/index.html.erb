@@ -1,10 +1,13 @@
 <h1>Plots</h1>
 
 <% @plots.each do |plot| %>
-  <p>Plot Number: <%= plot.number %></p>
-  <ul>
+  <div id="plot-plants-<%= plot.id %>">
+    <p>Plot Number: <%= plot.number %></p>
     <% plot.plants.each do |plant| %>
-      <li><%= plant.name %></li>
+      <div>
+        <%= plant.name %>
+        <%= button_to "Remove", remove_plant_from_plot_path(plot_id: plot.id, id: plant.id), method: :delete %>
+      </div>
     <% end %>
-  </ul>
+  </div>
 <% end %>

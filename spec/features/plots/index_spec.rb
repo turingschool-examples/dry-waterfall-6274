@@ -16,12 +16,37 @@ RSpec.describe "Plots Index Page", type: :feature do
     end
     
     # User Story 1
-   it "visitor sees all plots and their plants" do
+   it "shows all plots and their plants" do
         visit "/plots"
 
         expect(page).to have_content("Plot Number: #{@plot1.number}")
         expect(page).to have_content("Plot Number: #{@plot2.number}")
         expect(page).to have_content(@plant1.name)
         expect(page).to have_content(@plant2.name)
+    end
+
+    # User Story 2 
+    it "allows to remove a plant from a plot" do 
+        visit "/plots"
+
+        within("#plot-plants-#{@plot1.id}") do
+            expect(page).to have_content(@plant1.name)
+            click_on "Remove"
+        end
+        expect(current_path).to eq("/plots")
+
+        within("#plot-plants-#{@plot1.id}") do
+            expect(page).not_to have_content(@plant1.name)
+        end
+
+        within("#plot-plants-#{@plot2.id}") do
+            expect(page).to have_content(@plant2.name)
+            click_on "Remove"
+        end
+        expect(current_path).to eq("/plots")
+
+        within("#plot-plants-#{@plot2.id}") do
+            expect(page).not_to have_content(@plant2.name)
+        end
     end
 end

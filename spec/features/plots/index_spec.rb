@@ -40,4 +40,37 @@ RSpec.describe 'Plots index' do
             end
         end
     end
+
+    describe 'User Story 2' do
+            garden1 = Garden.create!(name: "West Asheville OG", organic: true)
+            plot1 = garden1.plots.create!(number: 1, size: "Large", direction: "East")
+            plot2 = garden1.plots.create!(number: 2, size: "Large", direction: "West")
+            avo = plot1.plants.create!(name: "Dwarf avocado", description: "Small and yummy tree", days_to_harvest: 365)
+            avo = plot2.plants.create!(name: "Dwarf avocado", description: "Small and yummy tree", days_to_harvest: 365)
+        # User Story 2, Remove a Plant from a Plot
+        it 'removes a plant from a plot' do
+            # As a visitor
+            # When I visit the plots index page
+            visit plots_path
+            # Next to each plant's name
+            # I see a button to remove that plant from that plot
+            within "#plots-#{plot1.id}" do
+                expect(page).to have_button("Remove Plant from plot")
+            end
+            # When I click on that button
+            click_button "Remove Plant from plot"
+            # I'm returned to the plots index page
+            expect(current_path).to eq(plots_path)
+            # And I no longer see that plant listed under that plot,
+            within "#plots-#{plot1.id}" do
+                expect(page).not_to have_content(avo.name)
+            end
+            # And I still see that plant's name under other plots that is was associated with.
+            within "#plots-#{plot2.id}" do
+                expect(page).to have_content(avo.name)
+            end
+        end
+
+        # Note: you do not need to test for any sad paths or implement any flash messages. 
+    end
 end

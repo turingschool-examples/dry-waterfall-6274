@@ -52,7 +52,7 @@ RSpec.describe 'Plots Index Page', type: :feature do
         # And I no longer see that plant listed under that plot,
         expect(page).not_to have_content("Tomatoe")
       end
-      save_and_open_page
+      
       within ".plot-#{@plot_west.id}" do
         # And I still see that plant's name under other plots that is was associated with.
         within "#plant-#{@plant_tomatoe.id}" do

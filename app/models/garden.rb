@@ -7,8 +7,6 @@ class Garden < ApplicationRecord
    end
 
    def upcoming_harvest_list
-      unique_plant_list.find_all do |plant|
-         plant.days_to_harvest.to_i <= 100
-      end
+      unique_plant_list.where("plants.days_to_harvest::integer <= ?", 100)
    end
 end

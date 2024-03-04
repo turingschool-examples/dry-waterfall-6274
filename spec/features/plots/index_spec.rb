@@ -15,6 +15,7 @@ RSpec.describe "Index Page", type: :feature do
 
         PlantPlot.create!(plant_id: @plant_1.id, plot_id: @plot_1.id)
         PlantPlot.create!(plant_id: @plant_2.id, plot_id: @plot_2.id)
+        PlantPlot.create!(plant_id: @plant_1.id, plot_id: @plot_2.id)
     end
 
     # User Story 1, Plots Index Page
@@ -31,6 +32,32 @@ RSpec.describe "Index Page", type: :feature do
       within "#plot-#{@plot_2.id}" do
         expect(page).to have_content("Plot Number: 5")
         expect(page).to have_content("Plant Name: Sun Flower")
+      end
+    end
+
+    # User Story 2, Remove a Plant from a Plot
+    it "has a button to remove plants from the plot" do 
+      # When I visit the plots index page
+      visit plots_path
+      # Next to each plant's name
+      # I see a button to remove that plant from that plot
+      # When I click on that button
+      within "#plot-#{@plot_1.id}" do
+        expect(page).to have_content("Plant Name: Lily's")
+        expect(page).to have_content("Remove Plant")
+        click_on("Remove Plant")
+      end
+      save_and_open_page
+      # I'm returned to the plots index page
+      expect(current_path).to eq(plots_path)
+      # And I no longer see that plant listed under that plot,
+      within "#plot-#{@plot_1.id}" do
+        expect(page).not_to have_content("Plant Name: Lily's")
+      end
+
+      # And I still see that plant's name under other plots that is was associated with.
+      within "#plot-#{@plot_2.id}" do
+        expect(page).to have_content("Plant Name: Lily's")
       end
     end
   end 

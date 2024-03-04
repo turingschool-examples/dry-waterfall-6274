@@ -4,7 +4,7 @@
     <p>Plot Number: <%= plot.number %></p>
     <ul id ="plot-<%= plot.id %>">
       <% plot.plants.each do |plant| %>
-        <li><%= plant.name %></li>
+        <li id="plot-plant-<%= plot.id %>-<%=plant.id %>"><%= plant.name %><%= button_to "Remove", "/plots/#{plot.id}/plot_plants/#{plant.id}", method: :delete %></li>
       <% end %>
     </ul>
   <% end %>

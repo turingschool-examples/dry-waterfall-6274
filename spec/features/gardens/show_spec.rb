@@ -30,7 +30,6 @@ RSpec.describe 'Garden show page' do
             expect(page).to have_content("Tomato")
             expect(page).to_not have_content("Bell Pepper")
             expect(page).to_not have_content("Kale")
-            save_and_open_page
         end
     end
 end

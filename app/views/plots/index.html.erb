@@ -2,8 +2,11 @@
     <section id="plot-<%= plot.id %>">
         <h3>Plot number: <%=plot.number%></h3>
         <ul>
-            <%plot.plants.each do |plant|%>
-                <li><%=plant.name%></li>
+            <%plot.plants.each do |plot_plant|%>
+                <li><%=plot_plant.name%>
+                <br>
+                <%= button_to "Remove #{plot_plant.name}", plot_plant_path(plot.id, plot_plant.id), method: :delete%></p>
+                </li>
             <%end%>
         </ul>
     </section>

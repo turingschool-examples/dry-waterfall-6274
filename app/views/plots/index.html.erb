@@ -1,0 +1,10 @@
+<%@plots.each do |plot|%>
+    <section id="plot-<%= plot.id %>">
+        <h3>Plot number: <%=plot.number%></h3>
+        <ul>
+            <%plot.plants.each do |plant|%>
+                <li><%=plant.name%></li>
+            <%end%>
+        </ul>
+    </section>
+<%end%>

@@ -6,9 +6,9 @@ RSpec.describe "Plots Index Page", type: :feature do
          @garden1 = Garden.create!(name: "Majorelle Garden", organic: false)
          @garden2 = Garden.create!(name: "Gardens Of Versailles", organic: true)
 
-         @plot1 = Plot.create!(number: 1, size: "Small", direction: "West", garden_id: @garden1.id)
-         @plot2 = Plot.create!(number: 2, size: "Medium", direction: "East", garden_id: @garden1.id)
-         @plot3 = Plot.create!(number: 3, size: "Large", direction: "North", garden_id: @garden2.id)
+         @plot1 = Plot.create!(number: 13, size: "Small", direction: "West", garden_id: @garden1.id)
+         @plot2 = Plot.create!(number: 23, size: "Medium", direction: "East", garden_id: @garden1.id)
+         @plot3 = Plot.create!(number: 36, size: "Large", direction: "North", garden_id: @garden2.id)
 
          @plant1 = Plant.create!(name: "Rose", description: "Delicate Flower", days_to_harvest: 50)
          @plant2 = Plant.create!(name: "Basil", description: "Fragrant Herb", days_to_harvest: 75)
@@ -29,6 +29,18 @@ RSpec.describe "Plots Index Page", type: :feature do
 
       it 'see a list of all plot numbers' do
          visit plots_path
+
+         within "#plot-#{plot1.id}" do
+            expect(page).to have_content(@plot1.number)
+         end
+
+         within "#plot-#{plot2.id}" do
+            expect(page).to have_content(@plot2.number)
+         end
+
+         within "#plot-#{plot2.id}" do
+            expect(page).to have_content(@plot2.number)
+         end
       end
    end
 end

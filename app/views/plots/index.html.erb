@@ -1,9 +1,14 @@
 <h1>Plots Index Page</h1>
 <% @plots.each  do|plot| %>
-  <div id="plot-<%=plot.id%>">
+  <section class="plot-<%=plot.id%>">
     <h3>Plot<%=plot.number%></h3>
-    <% plot.plants.each do |plant| %>
-      <%= plant.name %><br>
+    <% plot.plant_plots.each do |plant_plot| %>
+      <div id="plant-<%=plant_plot.plant.id%>">
+        <%= plant_plot.plant.name %><br>
+        <%= form_with(model: plant_plot, url: plant_plot_path(plant_plot), local: true, html: { method: :delete, class: 'remove-form' }) do |form| %>
+        <%= form.button "Remove" %>
+        <% end %>
+      </div>
     <% end %>
-  </div>
+  </section>
 <% end %>

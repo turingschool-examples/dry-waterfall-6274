@@ -15,20 +15,47 @@ RSpec.describe 'Plots Index Page', type: :feature do
       @plot_plant_1 = PlotPlant.create!(plant_id: @plant_1.id, plot_id: @plot_1.id)
       @plot_plant_2 = PlotPlant.create!(plant_id: @plant_2.id, plot_id: @plot_1.id)
       @plot_plant_3 = PlotPlant.create!(plant_id: @plant_2.id, plot_id: @plot_2.id)
-      @plot_plant_4 = PlotPlant.create!(plant_id: @plant_3.id, plot_id: @plot_2.id)    
+      @plot_plant_4 = PlotPlant.create!(plant_id: @plant_3.id, plot_id: @plot_2.id)  
+      
+      visit plots_path
+      
     end
 
     it 'can see a list of all plot numbers and a list of every plant inside each plot' do
-      visit plots_path
-
       within "#plot_#{@plot_1.id}" do
         expect(page).to have_content("Plot ##{@plot_1.id}")
-        expect(page).to have_content("Plants: #{@plant_1.name}, #{@plant_2.name}")
+        expect(page).to have_content(@plant_1.name)
+        expect(page).to have_content(@plant_2.name)
       end
       
       within "#plot_#{@plot_2.id}" do
         expect(page).to have_content("Plot ##{@plot_2.id}")
-        expect(page).to have_content("Plants: #{@plant_2.name}, #{@plant_3.name}")
+        expect(page).to have_content(@plant_2.name)
+        expect(page).to have_content(@plant_3.name)
+      end
+    end
+
+    it 'can use a button that is next to every plant within a plot to delete the plant from that plot' do
+      within "#plot_#{@plot_1.id}" do
+        within "#plot_#{@plot_1.id}_#{@plant_1.name}" do
+          expect(page).to have_button("Delete #{@plant_1.name}")         
+          click_on "Delete #{@plant_1.name}"
+        end
+        expect(page).not_to have_content(@plant_1.name)
+      end
+
+      within "#plot_#{@plot_1.id}" do
+        within "#plot_#{@plot_1.id}_#{@plant_2.name}" do
+          expect(page).to have_button("Delete #{@plant_2.name}")
+          click_on "Delete #{@plant_2.name}"
+        end
+        expect(page).not_to have_content(@plant_2.name)
+      end 
+
+      within "#plot_#{@plot_2.id}" do
+        within "#plot_#{@plot_2.id}_#{@plant_2.name}" do
+          expect(page).to have_content(@plant_2.name)
+        end
       end
     end
   end

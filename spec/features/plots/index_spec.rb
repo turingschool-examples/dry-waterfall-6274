@@ -94,5 +94,36 @@ RSpec.describe "Plots Index Page", type: :feature do
             end
          end
       end
+
+      it 'When I chick that button user is redirected to index page and plant name is no longer under plant' do
+         visit plots_path
+
+         within "#plot-#{@plot1.id}" do
+            within "#plant-#{@plant1.id}" do
+               expect(page).to have_content(@plant1.name)
+               expect(page).to have_button("Remove Plant from Plot")
+
+               click_button "Remove Plant from Plot"
+            end
+         end
+
+         expect(current_path).to eq(plots_path)
+
+         within "#plot-#{@plot1.id}" do
+            expect(page).to have_no_content(@plant1.name)
+
+            within "#plant-#{@plant2.id}" do
+               expect(page).to have_content(@plant2.name)
+               expect(page).to have_button("Remove Plant from Plot")
+            end
+         end
+
+         within "#plot-#{@plot2.id}" do
+            within "#plant-#{@plant1.id}" do
+               expect(page).to have_content(@plant1.name)
+               expect(page).to have_button("Remove Plant from Plot")
+            end
+         end
+      end
    end
 end

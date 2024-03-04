@@ -38,18 +38,16 @@ RSpec.describe "Plots index page" do
     PlotPlant.create!(plot: @plot_5, plant: @eggplant)
   end
 
-  
-  it "has a list of all plot numbers" do
-    visit plots_path
-
-    expect(page).to have_content("Plot Number: 1")
-    expect(page).to have_content("Plot Number: 2")
-    expect(page).to have_content("Plot Number: 3")
-    expect(page).to have_content("Plot Number: 4")
-    expect(page).to have_content("Plot Number: 5")
-  end
-
   describe "User Story 1 - Plots Index Page" do
+    it "has a list of all plot numbers" do
+      visit plots_path
+
+      expect(page).to have_content("Plot Number: 1")
+      expect(page).to have_content("Plot Number: 2")
+      expect(page).to have_content("Plot Number: 3")
+      expect(page).to have_content("Plot Number: 4")
+      expect(page).to have_content("Plot Number: 5")
+    end
     it "has all plants belonging to each plot number" do
       visit plots_path
 

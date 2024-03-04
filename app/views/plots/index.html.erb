@@ -1,0 +1,15 @@
+<h3> All Plots:</h3>
+
+
+<% @plots.each do |plot| %>
+    
+    <li><%= plot.number %></li>
+    <li><%= "Plants" %> </li>
+    <% plot.plants.each do |plant| %>
+        <li><%= plant.name %></li>
+        <%= button_to "Remove #{plant.name}","/plots/#{plot.id}/plants/#{plant.id}", method: :delete %>
+  
+    <% end %>
+
+  
+<% end %>

@@ -13,19 +13,36 @@ RSpec.describe "Plots Index" do
     @plant_4 = @plot_2.plants.create!(name: "Sunflower", description: "Yellow and round", days_to_harvest: 3)
   end
 
-  it "list of all plot numbers" do
-    visit plots_path
+  describe "User Story 1" do
+    it "list of all plot numbers" do
+      visit plots_path
 
-    expect(page).to have_content("plot number: 1")
-    expect(page).to have_content("plot number: 27")
+      expect(page).to have_content("plot number: 1")
+      expect(page).to have_content("plot number: 27")
+    end
+
+    it "under each plot number I see the names of all that plot's plants" do
+      visit plots_path
+
+      expect(page).to have_content("Rose")
+      expect(page).to have_content("Banna Tree")
+      expect(page).to have_content("Violet Star")
+      expect(page).to have_content("Sunflower")
+    end
   end
 
-  it "under each plot number I see the names of all that plot's plants" do
-    visit plots_path
+  describe "User Story 2" do
+    it "has a button to remove that plant from that plot" do
+      visit plots_path
 
-    expect(page).to have_content("Rose")
-    expect(page).to have_content("Banna Tree")
-    expect(page).to have_content("Violet Star")
-    expect(page).to have_content("Sunflower")
+      expect(page).to have_content("Rose")
+      expect(page).to have_button("Remove")
+
+      click_on "Remove"
+
+      expect(current_path).to eq(plots_path)
+      expect(page).to_not have_content("Rose")
+    end
+
   end
 end

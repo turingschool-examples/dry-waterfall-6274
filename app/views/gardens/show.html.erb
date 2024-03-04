@@ -1,6 +1,4 @@
 <h1>Plants in <%= @garden.name %></h1>
-<% @garden.plants.each do |plant| %>
-  <% if plant.days_to_harvest.to_i <= 100 %>
-    <%= plant.name %><br>
-  <% end %>
+<% @garden.upcoming_harvest_list.each do |plant| %>
+  <%= plant.name %><br>
 <% end %>

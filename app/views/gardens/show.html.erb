@@ -1,0 +1,7 @@
+<h3><%= @garden.name %> Plants</h3>
+
+<p><u>Plants That Come to Harvest in Under a Hundred Days</u></p>
+
+<% @garden.harvest_under_hundred_days.each do |plant| %>
+  <%= plant.name %><br>
+<% end %>

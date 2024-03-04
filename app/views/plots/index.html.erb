@@ -4,6 +4,7 @@
   <ul>
     <% plot.plants.each do |plant| %>
       <li><%= plant.name %></li>
+      <%= button_to "Delete Plant", delete_plant_path(plant), method: :delete %>
     <% end %>
   </ul>
 <% end %>

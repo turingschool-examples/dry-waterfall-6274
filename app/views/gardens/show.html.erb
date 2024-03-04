@@ -1,17 +1,21 @@
-<h1><%=@garden.name%></h1>
+<section class="garden">
+  <h1>Garden: <%=@garden.name%></h1>
+</section>  
 
 <section class="plants">
+  <h2> All plants in Garden: </h2>
   <% @garden.plants.by_popularity.each do |plant| %>
     <div id="plant-<%= plant.id %>">
-      <h3><%= plant.name %></h3>
+      <h3>Plant: <%= plant.name %></h3>
     </div>
   <% end %>
 </section>
 
 <section class="plants-under-100">
+  <h2> Plants to be harvested in under 100 days: </h2>
   <% @garden.plants.unique_plants_harvested_in_one_hundred.each do |plant| %>
     <div id="plant-<%= plant.id %>">
-      <h3><%= plant.name %></h3>
+      <h3>Plant: <%= plant.name %></h3>
     </div>
   <% end %>
 </section>  

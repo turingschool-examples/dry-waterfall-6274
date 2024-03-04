@@ -17,19 +17,23 @@ RSpec.describe Garden, type: :model do
 
     @plot_1 = @garden_1.plots.create!(number: 1, size: "Large", direction: "South")
     @plot_2 = @garden_1.plots.create!(number: 2, size: "Small", direction: "East")
+    @plot_3 = @garden_1.plots.create!(number: 3, size: "Small", direction: "East")
+    @plot_4 = @garden_1.plots.create!(number: 4, size: "Small", direction: "East")
 
     @plot_plant_1 = PlotPlant.create!(plant_id: @plant_1.id, plot_id: @plot_1.id)
     @plot_plant_2 = PlotPlant.create!(plant_id: @plant_2.id, plot_id: @plot_1.id)
     @plot_plant_3 = PlotPlant.create!(plant_id: @plant_2.id, plot_id: @plot_2.id)
-    @plot_plant_4 = PlotPlant.create!(plant_id: @plant_3.id, plot_id: @plot_2.id)
-    @plot_plant_5 = PlotPlant.create!(plant_id: @plant_4.id, plot_id: @plot_2.id)
+    @plot_plant_4 = PlotPlant.create!(plant_id: @plant_3.id, plot_id: @plot_1.id)
+    @plot_plant_5 = PlotPlant.create!(plant_id: @plant_3.id, plot_id: @plot_2.id)
+    @plot_plant_6 = PlotPlant.create!(plant_id: @plant_3.id, plot_id: @plot_3.id)
+    @plot_plant_7 = PlotPlant.create!(plant_id: @plant_4.id, plot_id: @plot_2.id)
   end
 
   describe 'Instance Methods' do 
-    describe '#unique_fast_growing_plants' do
+    describe '#unique_fast_growing_plants_by_occurance' do
       it 'returns a unique list of all plants in plots that belong to the garden and have a time to harvest under 100 days' do
-        expect(@garden_1.unique_fast_growing_plants).to match_array([@plant_1, @plant_2, @plant_3])
-        expect(@garden_1.unique_fast_growing_plants.include?(@plant_4)).to eq(false)
+        expect(@garden_1.unique_fast_growing_plants_by_occurance).to eq([@plant_3, @plant_2, @plant_1])
+        expect(@garden_1.unique_fast_growing_plants_by_occurance.include?(@plant_4)).to eq(false)
       end
     end
   end

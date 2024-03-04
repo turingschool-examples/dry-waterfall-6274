@@ -6,7 +6,7 @@
       <p>Plants:</p>
       <ul>
         <% plot.plants.each do |plant| %>
-          <li>Plant Name: <%= plant.name %> <%= button_to 'Remove Plant',  plot_plant_path(plot_id: plot.id, id: plant.id), method: :delete, data: {turbo: :false}%></li> 
+          <li>Plant Name: <%= plant.name %> <%= button_to 'Remove Plant', "/plots/#{plot.id}/plants/#{plant.id}", method: :delete, data: {turbo: :false}%></li> 
         <% end %>
       </ul>
     </ul>

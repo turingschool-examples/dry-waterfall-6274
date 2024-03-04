@@ -47,7 +47,6 @@ RSpec.describe "Index Page", type: :feature do
         expect(page).to have_content("Remove Plant")
         click_on("Remove Plant")
       end
-      save_and_open_page
       # I'm returned to the plots index page
       expect(current_path).to eq(plots_path)
       # And I no longer see that plant listed under that plot,

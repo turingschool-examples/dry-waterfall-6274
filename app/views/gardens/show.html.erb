@@ -1,0 +1,8 @@
+<h1><%= @garden.name %> Garden</h1>
+
+<h2>Harvestable Plants</h2>
+<ul>
+  <% @garden.harvestable_plants.each do |plant| %>
+    <li><%= plant.name %> - <%= plant.days_to_harvest %> days to harvest</li>
+  <% end %>
+</ul>

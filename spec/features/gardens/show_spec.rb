@@ -28,6 +28,7 @@ RSpec.describe "Gardens show" do
             expect(page).to have_content("Heirloom Tomato")
             expect(page).to have_content("Spinach")
             expect(page).to have_content("Arugula")
+            expect(page).to_not have_content("Dwarf avocado")
         end
     end
 end

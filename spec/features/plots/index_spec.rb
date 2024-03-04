@@ -16,22 +16,30 @@ RSpec.describe "Plots Index Page" do
 
     @summer_plot_3 = Plot.create!(number: 3, size: "large", direction: "West", garden_id: summerville.id)
 
-    plot_1_tomato = PlotPlant.create!(plant_id: tomato.id, plot_id: @summer_plot_1)
-    plot_1_onion = PlotPlant.create!(plant_id: onion.id, plot_id: @summer_plot_1)
-    plot_1_garlic = PlotPlant.create!(plant_id: garlic.id, plot_id: @summer_plot_1)
+    plot_1_tomato = PlotPlant.create!(plant_id: tomato.id, plot_id: @summer_plot_1.id)
+    plot_1_onion = PlotPlant.create!(plant_id: onion.id, plot_id: @summer_plot_1.id)
+    plot_1_garlic = PlotPlant.create!(plant_id: garlic.id, plot_id: @summer_plot_1.id)
 
-    plot_2_eggplant = PlotPlant.create!(plant_id: eggplant.id, plot_id: @summer_plot_2)
-    plot_2_watermelon = PlotPlant.create!(plant_id: watermelon.id, plot_id: @summer_plot_2)
+    plot_2_eggplant = PlotPlant.create!(plant_id: eggplant.id, plot_id: @summer_plot_2.id)
+    plot_2_watermelon = PlotPlant.create!(plant_id: watermelon.id, plot_id: @summer_plot_2.id)
 
-    plot_3_garlic = PlotPlant.create!(plant_id: garlic.id, plot_id: @summer_plot_3)
-    plot_3_cherries = PlotPlant.create!(plant_id: cherries.id, plot_id: @summer_plot_3)
+    plot_3_garlic = PlotPlant.create!(plant_id: garlic.id, plot_id: @summer_plot_3.id)
+    plot_3_cherries = PlotPlant.create!(plant_id: cherries.id, plot_id: @summer_plot_3.id)
 
     visit "/plots"
   end
 
   describe "User Story 1" do
     it "has a list of all plot numbers and their plants" do
+      save_and_open_page
       expect(page).to have_content("All Plots")
+
+      within "#plots" do
+        expect(page).to have_content("Plot Number: 1")
+        expect(page).to have_content("Plot Number: 2")
+        expect(page).to have_content("Plot Number: 3")
+      end
+
       within "#plot-#{@summer_plot_1.id}" do
         expect(page).to have_content("Tomato, Onion, Garlic")
         expect(page).to have_no_content("Eggplant")

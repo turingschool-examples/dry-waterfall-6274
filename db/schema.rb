@@ -21,13 +21,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_04_160814) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "plant_pots", force: :cascade do |t|
+  create_table "plant_plots", force: :cascade do |t|
     t.bigint "plot_id", null: false
     t.bigint "plant_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["plant_id"], name: "index_plant_pots_on_plant_id"
-    t.index ["plot_id"], name: "index_plant_pots_on_plot_id"
+    t.index ["plant_id"], name: "index_plant_plots_on_plant_id"
+    t.index ["plot_id"], name: "index_plant_plots_on_plot_id"
   end
 
   create_table "plants", force: :cascade do |t|
@@ -48,7 +48,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_04_160814) do
     t.index ["garden_id"], name: "index_plots_on_garden_id"
   end
 
-  add_foreign_key "plant_pots", "plants"
-  add_foreign_key "plant_pots", "plots"
+  add_foreign_key "plant_plots", "plants"
+  add_foreign_key "plant_plots", "plots"
   add_foreign_key "plots", "gardens"
 end

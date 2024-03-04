@@ -35,13 +35,17 @@ RSpec.describe "Plots Index" do
     it "has a button to remove that plant from that plot" do
       visit plots_path
 
-      expect(page).to have_content("Rose")
-      expect(page).to have_button("Remove")
+      @plot_1.plants.each do |plant|
+        within "#plants-#{plant.id}" do
+          expect(page).to have_content("Rose")
+          expect(page).to have_button("Remove")
 
-      click_on "Remove"
+          click_on "Remove"
 
-      expect(current_path).to eq(plots_path)
-      expect(page).to_not have_content("Rose")
+          expect(current_path).to eq(plots_path)
+          expect(page).to_not have_content("Rose")
+        end
+      end
     end
 
   end

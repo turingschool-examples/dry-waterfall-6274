@@ -1,16 +1,23 @@
 <h1>Plots</h1>
 
-<ol>
-  <% @plots.each do |plot| %>
-    <li>
-      plot number: <%= plot.number %><br> 
-      <% if plot.plants.any? %>
-        <% plot.plants.each do |plant| %>
-          <li><%= plant.name %></li>
+
+  <ol>
+    <% @plots.each do |plot| %>
+      <li>
+        plot number: <%= plot.number %><br> 
+        <% if plot.plants.any? %>
+          <% plot.plants.each do |plant| %>
+          <div id="plants-<%= plant.id %>">
+            <li>
+              <%= plant.name %>
+              <%= button_to "Remove", plot_path(plant), method: :patch %>
+          </li>
+            </li>
+            </div>
+          <% end %>
+      </li>
+        <% else %>
+          <p>No plants in this plot</p>
         <% end %>
-    </li>
-  <% else %>
-    <p>No plants in this plot</p>
-  <% end %>
-  <% end %>
-</ol>
+    <% end %>
+  </ol>

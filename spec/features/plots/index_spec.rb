@@ -17,8 +17,7 @@ RSpec.describe 'Plots Index Page', type: :feature do
       @plot_plant_3 = PlotPlant.create!(plant_id: @plant_2.id, plot_id: @plot_2.id)
       @plot_plant_4 = PlotPlant.create!(plant_id: @plant_3.id, plot_id: @plot_2.id)  
       
-      visit plots_path
-      
+      visit plots_path    
     end
 
     it 'can see a list of all plot numbers and a list of every plant inside each plot' do

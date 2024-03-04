@@ -1,7 +1,7 @@
 class PlantsController < ApplicationController
-    def index
-        @plants = Plant.all
-    end
+    # def index
+    #     @plants = Plant.all
+    # end
 
     def destroy
         @plot = Plot.find(params[:plot_id])

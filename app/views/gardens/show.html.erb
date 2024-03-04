@@ -1,0 +1,5 @@
+<h1>Plants in Garden plot that take less than 100 days to harvest:</h1>
+
+<% @garden.plants_harvest_under_100_days.each do |plant| %>
+  <P><%= plant.name %></p>
+<% end  %>

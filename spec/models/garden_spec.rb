@@ -23,16 +23,17 @@ RSpec.describe Garden, type: :model do
   end
 
   describe "instance methods" do
-    describe "unique_plant_list" do
-      it "returns an array of unique plants" do
-        expect(@garden_tu.unique_plant_list).to eq([@plant_pepper, @plant_cilantro, @plant_cherry, @plant_tomatoe, @plant_orange])
+    describe "odered_plants_by_occurrence" do
+      it "returns a collection of plants sorted by the number of times the plant appears in any of that garden's plots from most to least" do
+        expect(@garden_tu.ordered_plants_by_occurrence).to eq([@plant_tomatoe, @plant_pepper, @plant_cilantro, @plant_cherry, @plant_orange])
       end
     end
 
     describe "upcoming_harvest_list" do
       it "returns a collection of unique plants that will be harvested in less than 100 days" do
-        expect(@garden_tu.upcoming_harvest_list).to eq([@plant_pepper, @plant_cilantro, @plant_cherry, @plant_tomatoe])
+        expect(@garden_tu.upcoming_harvest_list).to eq([@plant_tomatoe, @plant_pepper, @plant_cilantro, @plant_cherry])
       end
     end
+
   end
 end

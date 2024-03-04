@@ -7,11 +7,15 @@ RSpec.describe 'plot#index', type: :feature do
   
       @plant_1 = Plant.create(name: 'Tomato', description: 'Red and juicy', days_to_harvest: 90)
       @plant_2 = Plant.create(name: 'Lettuce', description: 'Green and crisp', days_to_harvest: 30)
-  
+      @plant_3 = Plant.create(name: 'Test', description: 'Hello', days_to_harvest: 60)
+    
       @plot_1 = Plot.create(number: 1, size: 'Medium', direction: 'North', garden: @garden_1)
-  
+      @plot_2 = Plot.create(number: 2, size: 'Large', direction: 'South', garden: @garden_1)
+      @plot_3 = Plot.create(number: 3, size: 'Small', direction: 'East', garden: @garden_1)
+
       @plan_plot_1 = PlantPlot.create(plant: @plant_1, plot: @plot_1)
-      @plan_plot_2 =PlantPlot.create(plant: @plant_2, plot: @plot_1)
+      @plan_plot_2 =PlantPlot.create(plant: @plant_2, plot: @plot_2)
+      @plan_plot_3 =PlantPlot.create(plant: @plant_3, plot: @plot_3)
     end
 
     # User Story 1, Plots Index Page
@@ -33,15 +37,31 @@ RSpec.describe 'plot#index', type: :feature do
       visit plots_path
       # Next to each plant's name
       # I see a button to remove that plant from that plot
-      expect(page).to have_content("Remove")
       # When I click on that button
-      first('.remove-button').click
       # I'm returned to the plots index page
-      expect(current_path).to eq(plots_path)
       # And I no longer see that plant listed under that plot,
-      expect(page).to_not have_content(@plant_1.name)
       # And I still see that plant's name under other plots that is was associated with.
-      expect(page).to have_content(@plant_2.name)
+      within "#plot-#{@plot_1.id}" do
+        expect(page).to have_content(@plant_1.name)
+        expect(page).to have_content("Remove")
+        first('.remove-button').click
+        expect(current_path).to eq(plots_path)
+        expect(page).to_not have_content(@plant_2.name)
+      end
+      within "#plot-#{@plot_2.id}" do
+        expect(page).to have_content(@plant_2.name)
+        expect(page).to have_content("Remove")
+        first('.remove-button').click
+        expect(current_path).to eq(plots_path)
+        expect(page).to_not have_content(@plant_1.name)
+      end
+      within "#plot-#{@plot_3.id}" do
+        expect(page).to have_content(@plant_3.name)
+        expect(page).to have_content("Remove")
+        first('.remove-button').click
+        expect(current_path).to eq(plots_path)
+        expect(page).to_not have_content(@plant_2.name)
+      end
     end
   end
 end

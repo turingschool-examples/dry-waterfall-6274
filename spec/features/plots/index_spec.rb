@@ -37,7 +37,8 @@ RSpec.describe 'Plots Index Page', type: :feature do
     it 'can use a button that is next to every plant within a plot to delete the plant from that plot' do
       within "#plot_#{@plot_1.id}" do
         within "#plot_#{@plot_1.id}_#{@plant_1.name}" do
-          expect(page).to have_button("Delete #{@plant_1.name}")         
+          expect(page).to have_button("Delete #{@plant_1.name}")
+
           click_on "Delete #{@plant_1.name}"
         end
         expect(page).not_to have_content(@plant_1.name)
@@ -46,6 +47,7 @@ RSpec.describe 'Plots Index Page', type: :feature do
       within "#plot_#{@plot_1.id}" do
         within "#plot_#{@plot_1.id}_#{@plant_2.name}" do
           expect(page).to have_button("Delete #{@plant_2.name}")
+          
           click_on "Delete #{@plant_2.name}"
         end
         expect(page).not_to have_content(@plant_2.name)

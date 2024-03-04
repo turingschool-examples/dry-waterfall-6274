@@ -42,9 +42,9 @@ RSpec.describe "Gardens show page" do
       expect(page).to have_content("Lettuce Plant")
 
       expect(page).to have_content("Cucumber Plant")
-      
+
       expect(page).to_not have_content("Carrot plant")
-      save_and_open_page
+      # save_and_open_page
       # Then I see a list of plants that are included in that garden's plots
       # And I see that this list is unique (no duplicate plants)
       # And I see that this list only includes plants that take less than 100 days to harvest

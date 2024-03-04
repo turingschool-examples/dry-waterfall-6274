@@ -3,7 +3,9 @@
   <% @plots.each do |plot| %>
     <p>Plot Number: <%= plot.number %></p>
     <ul id ="plot-<%= plot.id %>">
-      <li><%= plot.name_of_plants.join(", ") %></li>
+      <% plot.plants.each do |plant| %>
+        <li><%= plant.name %></li>
+      <% end %>
     </ul>
   <% end %>
 </section>

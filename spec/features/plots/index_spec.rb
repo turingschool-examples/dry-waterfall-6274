@@ -41,14 +41,17 @@ RSpec.describe "Plots Index Page" do
       end
 
       within "#plot-#{@summer_plot_1.id}" do
-        expect(page).to have_content("Tomato, Onion, Garlic")
+        expect(page).to have_content("Tomato")
+        expect(page).to have_content("Onion")
+        expect(page).to have_content("Garlic")
         expect(page).to have_no_content("Eggplant")
         expect(page).to have_no_content("Watermelon")
         expect(page).to have_no_content("Cherries")
       end
 
       within "#plot-#{@summer_plot_2.id}" do
-        expect(page).to have_content("Eggplant, Watermelon")
+        expect(page).to have_content("Eggplant")
+        expect(page).to have_content("Watermelon")
         expect(page).to have_no_content("Tomato")
         expect(page).to have_no_content("Onion")
         expect(page).to have_no_content("Garlic")
@@ -56,11 +59,18 @@ RSpec.describe "Plots Index Page" do
       end
 
       within "#plot-#{@summer_plot_3.id}" do
-        expect(page).to have_content("Garlic, Cherries")
+        expect(page).to have_content("Garlic")
+        expect(page).to have_content("Cherries")
         expect(page).to have_no_content("Tomato")
         expect(page).to have_no_content("Onion")
         expect(page).to have_no_content("Eggplant")
         expect(page).to have_no_content("Watermelon")
+      end
+    end
+
+    describe "User Story 2 - Remove a Plant from a Plot" do
+      it "has a button next to each plant" do
+
       end
     end
   end

@@ -27,7 +27,7 @@ RSpec.describe "Plots Index Page", type: :feature do
          @plot_plant7 = PlotPlant.create!(plot: @plot3, plant: @plant4)
       end
 
-      it 'see a list of all plot numbers' do
+      it 'see a list of all plot numbers and the names of all the plots plants' do
          visit plots_path
 
          within "#plot-#{@plot1.id}" do
@@ -42,11 +42,56 @@ RSpec.describe "Plots Index Page", type: :feature do
             expect(page).to have_content(@plant5.name)
          end
 
-         within "#plot-#{@plot2.id}" do
-            expect(page).to have_content(@plot2.number)
+         within "#plot-#{@plot3.id}" do
+            expect(page).to have_content(@plot3.number)
             expect(page).to have_content(@plant3.name)
             expect(page).to have_content(@plant2.name)
             expect(page).to have_content(@plant4.name)
+         end
+      end
+
+      it 'next to each plant I see a buton to remove that plant from that plot' do
+         visit plots_path
+
+         within "#plot-#{@plot1.id}" do
+            within "#plant-#{@plant1.id}" do
+               expect(page).to have_content(@plant1.name)
+               expect(page).to have_button("Remove Plant from Plot")
+            end
+
+            within "#plant-#{@plant2.id}" do
+               expect(page).to have_content(@plant2.name)
+               expect(page).to have_button("Remove Plant from Plot")
+            end
+         end
+
+         within "#plot-#{@plot2.id}" do
+            within "#plant-#{@plant1.id}" do
+               expect(page).to have_content(@plant1.name)
+               expect(page).to have_button("Remove Plant from Plot")
+            end
+
+            within "#plant-#{@plant5.id}" do
+               expect(page).to have_content(@plant5.name)
+               expect(page).to have_button("Remove Plant from Plot")
+            end
+         end
+
+         within "#plot-#{@plot3.id}" do
+            within "#plant-#{@plant3.id}" do
+               expect(page).to have_content(@plant3.name)
+               expect(page).to have_button("Remove Plant from Plot")
+            end
+
+            within "#plant-#{@plant2.id}" do
+               expect(page).to have_content(@plant2.name)
+               expect(page).to have_button("Remove Plant from Plot")
+            end
+
+            within "#plant-#{@plant4.id}" do
+               expect(page).to have_content(@plant4.name)
+               expect(page).to have_button("Remove Plant from Plot")
+            end
          end
       end
    end

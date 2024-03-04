@@ -1,0 +1,13 @@
+<%@plots.each do |plot|%>
+    <section id="plot-<%= plot.id %>">
+        <h3>Plot number: <%=plot.number%></h3>
+        <ul>
+            <%plot.plants.each do |plot_plant|%>
+                <li><%=plot_plant.name%>
+                <br>
+                <%= button_to "Remove #{plot_plant.name}", "/plots/#{plot.id}/plants/#{plot_plant.id}", method: :delete%></p>
+                </li>
+            <%end%>
+        </ul>
+    </section>
+<%end%>

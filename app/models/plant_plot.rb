@@ -1,4 +1,4 @@
-class PlantPot < ApplicationRecord
-  belongs_to :plot
+class PlantPlot < ApplicationRecord
   belongs_to :plant
+  belongs_to :plot
 end

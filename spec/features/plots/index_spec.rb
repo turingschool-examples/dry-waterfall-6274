@@ -49,7 +49,7 @@ RSpec.describe "Plots index page" do
     expect(page).to have_content("Plot Number: 5")
   end
 
-  describe "User Story 1" do
+  describe "User Story 1 - Plots Index Page" do
     it "has all plants belonging to each plot number" do
       visit plots_path
 
@@ -96,6 +96,46 @@ RSpec.describe "Plots index page" do
         expect(page).to_not have_content("Spinach")
         expect(page).to_not have_content("Tomato")
         expect(page).to_not have_content("Broccoli")
+      end
+    end
+  end
+
+  describe "User Story 2 - Remove a Plant from a Plot" do
+    it "can remove plants from a plot" do
+      visit plots_path
+  
+      within("#plot-#{@plot_1.id}") do
+        expect(page).to have_content("Wheat")
+        within("#plot-#{@plot_1.id}-plant-#{@wheat.id}") do
+          click_button("Remove Plant From Plot")
+        end
+        expect(page).to have_content("Spinach")
+        within("#plot-#{@plot_1.id}-plant-#{@spinach.id}") do
+          click_button("Remove Plant From Plot")
+        end
+      end
+  
+      expect(current_path).to eq(plots_path)
+  
+      within("#plot-#{@plot_1.id}") do
+        expect(page).to_not have_content("Wheat")
+        expect(page).to_not have_content("Spinach")
+      end
+  
+      within("#plot-#{@plot_2.id}") do
+        expect(page).to have_content("Spinach")
+      end
+  
+      within("#plot-#{@plot_3.id}") do
+        expect(page).to have_content("Wheat")
+      end
+  
+      within("#plot-#{@plot_4.id}") do
+        expect(page).to have_content("Wheat")
+      end
+  
+      within("#plot-#{@plot_5.id}") do
+        expect(page).to have_content("Wheat")
       end
     end
   end

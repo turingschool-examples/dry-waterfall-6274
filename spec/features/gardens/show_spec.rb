@@ -31,5 +31,14 @@ RSpec.describe 'Gardens Show Page', type: :feature do
       # And I see that this list only includes plants that take less than 100 days to harvest
       expect(page).not_to have_content("Orange")
     end
+
+    # Extension 1
+    it "displays a list of plants is sorted by the number of times the plant appears in any of that garden's plots from most to least" do
+      # As a visitor, When I visit a garden's show page,
+      visit garden_path(@garden_tu.id)
+      # Then I see the list of plants is sorted by the number of times the plant appears in any of that garden's plots from most to least
+      expect("Tomatoe").to appear_before("Cilantro")
+      # (Note: you should only make 1 database query to retrieve the sorted list of plants).
+    end
   end
 end

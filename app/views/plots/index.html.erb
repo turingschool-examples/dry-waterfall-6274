@@ -1,5 +1,16 @@
 <h1>Plots</h1>
 
-<% @plots.each do |plot| %>
-  plot number: <%= plot.number %>
-<% end %>
+<ol>
+  <% @plots.each do |plot| %>
+    <li>
+      plot number: <%= plot.number %><br> 
+      <% if plot.plants.any? %>
+        <% plot.plants.each do |plant| %>
+          <li><%= plant.name %></li>
+        <% end %>
+    </li>
+  <% else %>
+    <p>No plants in this plot</p>
+  <% end %>
+  <% end %>
+</ol>

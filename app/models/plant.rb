@@ -10,6 +10,6 @@ class Plant < ApplicationRecord
     Plant.select("plants.*, count(plants.id) as number_of_plants")
           .joins(:plot_plants)
           .group(:id)
-          .order("number_of_plants desc, created_at desc")
+          .order("number_of_plants desc, created_at asc")
   end
 end

@@ -67,8 +67,17 @@ RSpec.describe Plant, type: :model do
         fall_plot_1_watermelon = PlotPlant.create!(plant_id: @watermelon.id, plot_id: fall_plot_1.id)
       end
 
-      it "orders the most popular plants" do
+      it "orders the most popular plants and then by created_at desc" do
         expect(Plant.most_popular_plants).to eq [@cherries, @eggplant, @garlic, @watermelon, @onion]
+        summer_plot_5 = Plot.create!(number: 3, size: "small", direction: "West", garden_id: @summerville.id)
+        summer_plot_6 = Plot.create!(number: 3, size: "small", direction: "West", garden_id: @summerville.id)
+        summer_plot_7 = Plot.create!(number: 3, size: "small", direction: "West", garden_id: @summerville.id)
+        PlotPlant.create!(plant_id: @onion.id, plot_id: summer_plot_5.id)
+        PlotPlant.create!(plant_id: @onion.id, plot_id: summer_plot_6.id)
+        PlotPlant.create!(plant_id: @onion.id, plot_id: summer_plot_7.id)
+
+        expect(Plant.most_popular_plants).to eq([@cherries, @onion, @eggplant, @garlic, @watermelon])
+
       end
 
       it "gives access to the number of plants" do

@@ -5,7 +5,10 @@
     <h2> Plot <%= plot.id %> </h2>
     <% plot.plants.each do |plant| %>
       <ul>
-        <li> <%= plant.name %></li>
+        <li> 
+          <%= plant.name %>
+          <%= button_to "Delete", url: ,method: :delete %>
+        </li>
       </ul>
     <% end %>
   </div>

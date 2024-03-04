@@ -74,5 +74,31 @@ RSpec.describe "Plots Index", type: :feature do
         expect(page).to_not have_content("Cabbage")
       end
     end
+
+    describe "can remove plant from a plot" do
+      it "delete button next to each plant" do
+        within "#plot-#{plot_1.id}" do
+          expect(page).to have_content("Delete", count: 2)
+        end
+
+        within "#plot-#{plot_4.id}" do
+         expect(page).to have_content("Delete", count: 3)
+        end
+      end
+
+      it "clicking 'delete' reloads the page without the deleted item" do
+        within "#plot-#{plot_1.id}" do
+          click_on "Delete", match: :first
+
+          expect(current_path).to eq("/plots")
+          expect(page).to have_content("Potato")
+          expect(page).to_not have_content("Pumpkin")
+        end
+
+        within "#plot-#{plot_4.id}" do
+          expect(page).to have_content("Pumpkin")
+        end
+      end
+    end
   end
 end

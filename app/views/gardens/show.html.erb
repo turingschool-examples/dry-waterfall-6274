@@ -8,7 +8,7 @@
 
 <h3>Plants that appear most often:</h3>
 <ul id="plants-most-often">
-  <%= @garden.plants.most_popular_plants.each do |plant| %>
+  <% @garden.plants.most_popular_plants.each do |plant| %>
     <li><%= plant.name %></li>
   <% end %>
 </ul>

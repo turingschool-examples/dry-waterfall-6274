@@ -51,9 +51,16 @@ RSpec.describe "Garden Show Page" do
   describe "Extension 1" do
     it "has a list of Plants sorted by number of times the Plant appears in the Garden's Plots desc" do
       expect(page).to have_text("Plants that appear most often:")
+      save_and_open_page
       within "#plants-most-often" do
-        expect("Cherries").to appear_before("Eggplant")
-        expect("Eggplant").to appear_before("Onion")
+        plants = page.all("li")
+
+        expect(plants[0]).to have_text("Cherries")
+        expect(plants[1]).to have_text("Garlic")
+        expect(plants[2]).to have_text("Eggplant")
+        expect(plants[3]).to have_text("Tomato")
+        expect(plants[4]).to have_text("Onion")
+        expect(plants[5]).to have_text("Watermelon")
       end
     end
   end

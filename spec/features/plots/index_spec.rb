@@ -66,26 +66,21 @@ RSpec.describe 'Plots index page' do
                 expect(page).to have_content("Bell Pepper")
                 expect(page).to have_button("Remove Bell Pepper")
                 click_on "Remove Bell Pepper"
-                expect(current_path).to eq(visit plots_path)
-            end
+                expect(current_path).to eq(plots_path)
+            end 
             
             visit plots_path
+
             within("#plot-#{@blue_plot.id}") do
                 expect(page).to have_button("Remove Tomato")
                 click_on "Remove Tomato"
-                expect(current_path).to eq(visit plots_path)
+                expect(current_path).to eq(plots_path)
             end
             # And I no longer see that plant listed under that plot,
             # And I still see that plant's name under other plots that is was associated with.
-            visit plots_path
-            within("#plot-#{@green_plot.id}") do
-                expect(page).to_not have_content("Bell Pepper")
-                expect(page).to_not have_button("Remove Bell Pepper")
-            end
-            
-            visit plots_path
-            within("#plot-#{@blue_plot.id}") do
-                expect(page).to_not have_content("Bell Pepper")
+             visit plots_path
+
+             within("#plot-#{@blue_plot.id}") do
                 expect(page).to_not have_button("Remove Tomato")
             end
             

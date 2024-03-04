@@ -22,6 +22,8 @@ RSpec.describe Garden, type: :model do
       @plant_plot2 = PlantPlot.create!(plot_id: @green_plot.id, plant_id: @dill.id)
       @plant_plot3 = PlantPlot.create!(plot_id: @blue_plot.id, plant_id: @tomato.id)
       @plant_plot4 = PlantPlot.create!(plot_id: @blue_plot.id, plant_id: @bell_pepper.id)
+      @plant_plot5 = PlantPlot.create!(plot_id: @blue_plot.id, plant_id: @dill.id)
+      @plant_plot6 = PlantPlot.create!(plot_id: @green_plot.id, plant_id: @tomato.id)
     end
     it 'retrieves list of plants with days to harvest less than 100' do
       expect(@mac_garden.plant_list).to eq([@dill, @tomato])

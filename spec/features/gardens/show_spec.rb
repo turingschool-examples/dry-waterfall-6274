@@ -17,6 +17,8 @@ RSpec.describe 'Garden show page' do
             @plant_plot2 = PlantPlot.create!(plot_id: @green_plot.id, plant_id: @dill.id)
             @plant_plot3 = PlantPlot.create!(plot_id: @blue_plot.id, plant_id: @tomato.id)
             @plant_plot4 = PlantPlot.create!(plot_id: @blue_plot.id, plant_id: @bell_pepper.id)
+            @plant_plot5 = PlantPlot.create!(plot_id: @blue_plot.id, plant_id: @dill.id)
+            @plant_plot6 = PlantPlot.create!(plot_id: @green_plot.id, plant_id: @tomato.id)
         end
 
         it 'display a unique list of plants that take less than 100 days to harvest' do
@@ -30,6 +32,7 @@ RSpec.describe 'Garden show page' do
             expect(page).to have_content("Tomato")
             expect(page).to_not have_content("Bell Pepper")
             expect(page).to_not have_content("Kale")
+            save_and_open_page
         end
     end
 end
